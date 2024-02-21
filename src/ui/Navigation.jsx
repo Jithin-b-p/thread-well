@@ -7,11 +7,11 @@ const UList = styled.ul`
   font-weight: 400;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  /* gap: 2rem; */
 `;
 
 const ListItem = styled.li`
-  padding: 1rem 0.5rem;
+  padding: 1rem 1rem;
   transition: all 0.2s;
 
   &:hover:not(:last-child) {

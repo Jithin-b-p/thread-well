@@ -37,7 +37,7 @@ const sections = [
 ];
 
 const StyledHomeLayout = styled.section`
-  width: min(80%, 80rem);
+  width: min(80%, 75rem);
   margin-inline: auto;
   display: flex;
   flex-wrap: wrap;
