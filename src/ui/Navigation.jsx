@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FaShoppingCart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const StyledNavigation = styled.nav``;
 
@@ -33,10 +34,10 @@ function Navigation() {
     <StyledNavigation>
       <UList>
         <ListItem>
-          <a href="#">SHOP</a>
+          <Link to="/shop">SHOP</Link>
         </ListItem>
         <ListItem>
-          <a href="#">CONTACT</a>
+          <Link to="/contact">CONTACT</Link>
         </ListItem>
         <ListItem>
           <a href="#">SIGN IN</a>

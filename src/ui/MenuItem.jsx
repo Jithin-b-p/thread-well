@@ -28,7 +28,7 @@ const BackgroundImage = styled.div`
   }
 `;
 
-function MenuItem({ title, color, bgurl }) {
+function MenuItem({ title, bgurl }) {
   return (
     <StyledMenuItem>
       <BackgroundImage $bgurl={bgurl}>
