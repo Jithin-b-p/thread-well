@@ -1,11 +1,16 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
 
-const StyledPreviewItem = styled.div``;
+const StyledPreviewItem = styled.div`
+  flex: 1 1 auto;
+  height: 20rem;
+`;
 
 const ImageContainer = styled.div`
-  width: 17rem;
-  height: 20rem;
+  width: 100%;
+  height: 100%;
+  /* width: 15rem;
+  height: 20rem; */
   overflow: hidden;
 `;
 const Image = styled.div`

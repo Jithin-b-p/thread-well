@@ -5,8 +5,9 @@ import PreviewItem from "./PreviewItem";
 
 const StyledCollectionPreview = styled.div`
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 `;
 
 function CollectionPreview({ items }) {

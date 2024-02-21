@@ -40,7 +40,7 @@ function Navigation() {
           <Link to="/contact">CONTACT</Link>
         </ListItem>
         <ListItem>
-          <a href="#">SIGN IN</a>
+          <Link to="/signin">SIGN IN</Link>
         </ListItem>
         <ListItem>
           <a href="#">

@@ -9,6 +9,7 @@ import Womenspage from "./pages/Womenspage.jsx";
 import Menspage from "./pages/Menspage.jsx";
 import Shoppage from "./pages/shop/Shoppage.jsx";
 import Contactpage from "./pages/Contactpage.jsx";
+import Signinpage from "./pages/SigninSignuppage.jsx";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="mens" element={<Menspage />} />
           <Route path="shop" element={<Shoppage />} />
           <Route path="contact" element={<Contactpage />} />
+          <Route path="signin" element={<Signinpage />} />
         </Routes>
       </BrowserRouter>
     </>
