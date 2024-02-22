@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/authContext/AuthContext";
+import { doSignOut } from "../firebase/Auth";
 
 const StyledNavigation = styled.nav``;
 
@@ -30,6 +32,8 @@ const ListItem = styled.li`
 `;
 
 function Navigation() {
+  const { userLoggedIn } = useAuth();
+
   return (
     <StyledNavigation>
       <UList>
@@ -40,7 +44,11 @@ function Navigation() {
           <Link to="/contact">CONTACT</Link>
         </ListItem>
         <ListItem>
-          <Link to="/signin">SIGN IN</Link>
+          {userLoggedIn ? (
+            <span onClick={doSignOut}>SIGN OUT</span>
+          ) : (
+            <Link to="/signin">SIGN IN</Link>
+          )}
         </ListItem>
         <ListItem>
           <a href="#">

@@ -10,10 +10,11 @@ import Menspage from "./pages/Menspage.jsx";
 import Shoppage from "./pages/shop/Shoppage.jsx";
 import Contactpage from "./pages/Contactpage.jsx";
 import Signinpage from "./pages/SigninSignuppage.jsx";
+import { AuthProvider } from "./contexts/authContext/AuthContext.jsx";
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <GlobalStyles />
       <BrowserRouter>
         <Header />
@@ -30,7 +31,7 @@ function App() {
           <Route path="signin" element={<Signinpage />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </AuthProvider>
   );
 }
 

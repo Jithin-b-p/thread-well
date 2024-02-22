@@ -1,8 +1,38 @@
 /* eslint-disable react/prop-types */
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const StyledButton = styled.button`
+const variations = {
+  primary: css`
+    background-color: #222;
+    color: #f2f2f2;
+
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  `,
+  secondary: css`
+    background-color: #276afb;
+    color: #fff;
+    border: none;
+
+    &:hover {
+      background-color: #1f52c1;
+      color: #f2f2f2;
+    }
+  `,
+
+  tertiary: css`
+    &:hover {
+      background-color: #000;
+      color: #f2f2f2;
+    }
+  `,
+};
+
+const Button = styled.button`
+  display: block;
   padding: 0.5rem 0.5rem;
   font-size: 0.74rem;
   font-weight: 700;
@@ -11,14 +41,11 @@ const StyledButton = styled.button`
   cursor: pointer;
   transition: all 0.2s;
 
-  &:hover {
-    background-color: #000;
-    color: #f2f2f2;
-  }
+  ${(props) => variations[props.$variation]}
 `;
 
-function Button({ children }) {
-  return <StyledButton>{children}</StyledButton>;
-}
+Button.defaultProps = {
+  variations: "tertiary",
+};
 
 export default Button;

@@ -4,15 +4,20 @@ import Label from "./Label";
 
 const StyledFormRow = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: ${(props) => props.$direction || "column"};
+  gap: 1rem;
 `;
 
-function FormRow({ label, children, inputValue }) {
+function FormRow({ label, children, inputValue, direction }) {
   return (
-    <StyledFormRow>
+    <StyledFormRow $direction={direction}>
       {children}
-      <Label htmlFor={children.props.id} $input={inputValue}>
-        {label.toUpperCase()}
-      </Label>
+      {label && (
+        <Label htmlFor={children.props.id} $input={inputValue}>
+          {label.toUpperCase()}
+        </Label>
+      )}
     </StyledFormRow>
   );
 }

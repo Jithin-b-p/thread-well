@@ -1,22 +1,26 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import Input from "./Input";
 import FormRow from "./FormRow";
 import Form from "./Form";
+import Button from "./Button";
+import { doSignInWithGoogle } from "../firebase/Auth";
 
 const StyledSignin = styled.div``;
 
 function Signin() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit, watch, reset } = useForm();
 
   const [currEmailValue, currPasswordValue] = watch(["email", "password"]);
-  console.log(currEmailValue);
+
   function onSubmit(data) {
     console.log(data);
+    reset();
+  }
+
+  function onGoogleSignIn(e) {
+    e.preventDefault();
+    doSignInWithGoogle();
   }
 
   return (
@@ -47,6 +51,14 @@ function Signin() {
               required: "This field is required",
             })}
           />
+        </FormRow>
+        <FormRow direction="row">
+          <Button type="submit" $variation="primary">
+            SIGN IN
+          </Button>
+          <Button onClick={onGoogleSignIn} $variation="secondary">
+            SIGN IN WITH GOOGLE
+          </Button>
         </FormRow>
       </Form>
     </StyledSignin>

@@ -31,5 +31,7 @@ const Label = styled.label`
   /* font-size: 0.8rem;
   letter-spacing: 0.1rem;
   color: #222222bb; */
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
 `;
 export default Label;
