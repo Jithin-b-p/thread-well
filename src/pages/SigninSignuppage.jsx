@@ -4,8 +4,9 @@ import Signup from "../ui/Signup";
 
 const StyledSigninpage = styled.main`
   display: flex;
-  gap: 2rem;
+  gap: 5rem;
   justify-content: center;
+  flex-wrap: wrap;
 `;
 
 function SigninSignuppage() {

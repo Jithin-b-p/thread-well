@@ -4,23 +4,31 @@ import Input from "./Input";
 import FormRow from "./FormRow";
 import Form from "./Form";
 import Button from "./Button";
-import { doSignInWithGoogle } from "../firebase/Auth";
+import { doSignInWithGoogle, signIn } from "../firebase/Auth";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/authContext/AuthContext";
 
 const StyledSignin = styled.div``;
 
 function Signin() {
   const { register, handleSubmit, watch, reset } = useForm();
-
   const [currEmailValue, currPasswordValue] = watch(["email", "password"]);
+  const navigate = useNavigate();
+  const { setLoading } = useAuth();
 
   function onSubmit(data) {
-    console.log(data);
+    const { email, password } = data;
+    signIn(email, password);
     reset();
+    navigate("/home");
   }
 
   function onGoogleSignIn(e) {
     e.preventDefault();
-    doSignInWithGoogle();
+    setLoading((loading) => !loading);
+    const result = doSignInWithGoogle();
+    result.then(() => setLoading((loading) => !loading));
+    navigate("/home");
   }
 
   return (
