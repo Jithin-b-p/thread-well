@@ -24,7 +24,7 @@ function FormRow({
   inputValue,
   direction,
   error,
-  emailError,
+  otherError,
 }) {
   return (
     <StyledFormRow $direction={direction}>
@@ -35,7 +35,7 @@ function FormRow({
         </Label>
       )}
       {(error && <Error>{error}</Error>) ||
-        (emailError && <Error>{emailError}</Error>)}
+        (otherError && <Error>{otherError}</Error>)}
     </StyledFormRow>
   );
 }

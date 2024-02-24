@@ -37,9 +37,10 @@ export const signIn = async (email, password) => {
   try {
     const res = await signInWithEmailAndPassword(auth, email, password);
     console.log("res:", res);
-    return res.user();
+    return res.user;
   } catch (error) {
     console.error("sign in error", error.message);
+    return error.code;
   }
 };
 
@@ -71,11 +72,11 @@ export const signUp = async (email, password, userData) => {
       uid: user.user.uid,
       ...userData,
     });
-    console.log(user.user);
+
     return user.user;
   } catch (error) {
     console.error(error.message);
-    console.log(error.code);
+
     return error.code;
   }
 };

@@ -5,9 +5,8 @@ import FormRow from "./FormRow";
 import Button from "./Button";
 import { useForm } from "react-hook-form";
 import { signUp } from "../firebase/Auth";
-import { useAuth } from "../contexts/authContext/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const StyledSignup = styled.div``;
 
@@ -21,7 +20,6 @@ function Signup() {
     setError,
     clearErrors,
   } = useForm();
-  const { setLoading } = useAuth();
   const navigate = useNavigate();
 
   const [name, currEmail, currPassword, confirmpass] = watch([
@@ -37,21 +35,15 @@ function Signup() {
 
   const onSubmit = (data) => {
     const { signupemail: email, signuppassword: password, displayname } = data;
-
-    setLoading((loading) => !loading);
     const res = signUp(email, password, { email, displayname });
-
     res.then((result) => {
       if (result === "auth/email-already-in-use") {
         setError("server", {
           type: "auth/email-already-in-use",
           message: "Already registered",
         });
-
         return;
       }
-
-      setLoading((loading) => !loading);
       reset();
       navigate("/home");
     });
@@ -82,7 +74,7 @@ function Signup() {
           label="Email"
           inputValue={currEmail?.length ? "true" : "false"}
           error={errors?.signupemail?.message}
-          emailError={errors?.server?.message}
+          otherError={errors?.server?.message}
         >
           <Input
             type="email"

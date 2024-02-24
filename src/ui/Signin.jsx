@@ -7,20 +7,45 @@ import Button from "./Button";
 import { doSignInWithGoogle, signIn } from "../firebase/Auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext/AuthContext";
+import { useEffect } from "react";
 
 const StyledSignin = styled.div``;
 
 function Signin() {
-  const { register, handleSubmit, watch, reset } = useForm();
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    setError,
+    clearErrors,
+  } = useForm();
   const [currEmailValue, currPasswordValue] = watch(["email", "password"]);
   const navigate = useNavigate();
   const { setLoading } = useAuth();
 
+  useEffect(() => {
+    clearErrors("invalidCredential");
+  }, [clearErrors, currEmailValue, currPasswordValue]);
+
   function onSubmit(data) {
     const { email, password } = data;
-    signIn(email, password);
-    reset();
-    navigate("/home");
+
+    const res = signIn(email, password);
+
+    res.then((result) => {
+      if (result === "auth/invalid-credential") {
+        setError("invalidCredential", {
+          type: "validation",
+          message: "invalid email/password",
+        });
+
+        return;
+      }
+      reset();
+      navigate("/home");
+    });
   }
 
   function onGoogleSignIn(e) {
@@ -51,6 +76,7 @@ function Signin() {
         <FormRow
           label="password"
           inputValue={currPasswordValue?.length ? "true" : "false"}
+          otherError={errors?.invalidCredential?.message}
         >
           <Input
             type="password"
