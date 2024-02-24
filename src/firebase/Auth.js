@@ -66,13 +66,16 @@ export const doSignOut = async () => {
 export const signUp = async (email, password, userData) => {
   try {
     const user = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(user);
+
     await setDoc(doc(db, "users", user.user.uid), {
       uid: user.user.uid,
       ...userData,
     });
+    console.log(user.user);
     return user.user;
   } catch (error) {
     console.error(error.message);
+    console.log(error.code);
+    return error.code;
   }
 };

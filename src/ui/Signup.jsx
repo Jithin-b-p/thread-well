@@ -7,15 +7,22 @@ import { useForm } from "react-hook-form";
 import { signUp } from "../firebase/Auth";
 import { useAuth } from "../contexts/authContext/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const StyledSignup = styled.div``;
 
 function Signup() {
-  const { register, handleSubmit, reset, watch } = useForm();
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    setError,
+    clearErrors,
+  } = useForm();
   const { setLoading } = useAuth();
   const navigate = useNavigate();
-  const [error, setError] = useState(false);
 
   const [name, currEmail, currPassword, confirmpass] = watch([
     "displayname",
@@ -24,35 +31,44 @@ function Signup() {
     "confirmpassword",
   ]);
 
-  const onSubmit = (data) => {
-    const {
-      signupemail: email,
-      signuppassword: password,
-      displayname,
-      confirmpassword,
-    } = data;
+  useEffect(() => {
+    clearErrors("server");
+  }, [clearErrors, currEmail]);
 
-    if (confirmpassword !== password) {
-      console.log("password error");
-      return;
-    }
+  const onSubmit = (data) => {
+    const { signupemail: email, signuppassword: password, displayname } = data;
 
     setLoading((loading) => !loading);
     const res = signUp(email, password, { email, displayname });
-    res.then(() => setLoading((loading) => !loading));
-    reset();
-    navigate("/home");
 
-    // signUp(email, password, data);
+    res.then((result) => {
+      if (result === "auth/email-already-in-use") {
+        setError("server", {
+          type: "auth/email-already-in-use",
+          message: "Already registered",
+        });
+
+        return;
+      }
+
+      setLoading((loading) => !loading);
+      reset();
+      navigate("/home");
+    });
+  };
+
+  const onError = (error) => {
+    console.log(error);
   };
   return (
     <StyledSignup>
       <h2>I do not have an account</h2>
       <p>Sign up with your email and password</p>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit, onError)}>
         <FormRow
           label="Display Name"
           inputValue={name?.length ? "true" : "false"}
+          error={errors?.displayname?.message}
         >
           <Input
             type="text"
@@ -65,18 +81,25 @@ function Signup() {
         <FormRow
           label="Email"
           inputValue={currEmail?.length ? "true" : "false"}
+          error={errors?.signupemail?.message}
+          emailError={errors?.server?.message}
         >
           <Input
             type="email"
             id="signupemail"
             {...register("signupemail", {
               required: "This field is required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Please enter a valid email address",
+              },
             })}
           />
         </FormRow>
         <FormRow
           label="Password"
           inputValue={currPassword?.length ? "true" : "false"}
+          error={errors?.signuppassword?.message}
         >
           <Input
             type="password"
@@ -89,12 +112,16 @@ function Signup() {
         <FormRow
           label="Confirm Password"
           inputValue={confirmpass?.length ? "true" : "false"}
+          error={errors?.confirmpassword?.message}
         >
           <Input
             type="password"
             id="confirmpassword"
             {...register("confirmpassword", {
               required: "This field is required",
+              validate: (fieldValue) => {
+                return fieldValue === currPassword || "Password not match";
+              },
             })}
           />
         </FormRow>

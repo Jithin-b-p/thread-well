@@ -9,7 +9,23 @@ const StyledFormRow = styled.div`
   gap: 1rem;
 `;
 
-function FormRow({ label, children, inputValue, direction }) {
+const Error = styled.p`
+  font-size: 0.8rem;
+  color: #890303;
+  font-style: italic;
+  position: absolute;
+  top: 2rem;
+  left: 0.7rem;
+`;
+
+function FormRow({
+  label,
+  children,
+  inputValue,
+  direction,
+  error,
+  emailError,
+}) {
   return (
     <StyledFormRow $direction={direction}>
       {children}
@@ -18,6 +34,8 @@ function FormRow({ label, children, inputValue, direction }) {
           {label.toUpperCase()}
         </Label>
       )}
+      {(error && <Error>{error}</Error>) ||
+        (emailError && <Error>{emailError}</Error>)}
     </StyledFormRow>
   );
 }

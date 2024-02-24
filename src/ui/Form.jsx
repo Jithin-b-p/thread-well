@@ -5,7 +5,7 @@ const Form = styled.form`
   padding-block-start: 3rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.1rem;
 `;
 
 export default Form;
