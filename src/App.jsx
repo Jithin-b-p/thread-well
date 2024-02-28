@@ -1,5 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { Provider, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 
 import Homepage from "./pages/Homepage";
 import Hatspage from "./pages/Hatspage.jsx";
@@ -12,15 +14,13 @@ import Menspage from "./pages/Menspage.jsx";
 import Shoppage from "./pages/shop/Shoppage.jsx";
 import Contactpage from "./pages/Contactpage.jsx";
 import Signinpage from "./pages/SigninSignuppage.jsx";
-import { store } from "./redux/store.js";
-import { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase.js";
 import { login } from "./redux/user/userSlice.js";
 // import { AuthProvider } from "./contexts/authContext/AuthContext.jsx";
 
 function App() {
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
@@ -51,7 +51,10 @@ function App() {
           <Route path="mens" element={<Menspage />} />
           <Route path="shop" element={<Shoppage />} />
           <Route path="contact" element={<Contactpage />} />
-          <Route path="signin" element={<Signinpage />} />
+          <Route
+            path="signin"
+            element={currentUser ? <Homepage /> : <Signinpage />}
+          />
         </Routes>
       </BrowserRouter>
       {/* </AuthProvider> */}

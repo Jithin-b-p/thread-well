@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // import { useAuth } from "../contexts/authContext/AuthContext";
 import { doSignOut } from "../firebase/Auth";
 import { useSelector } from "react-redux";
+import CartIcon from "./CartIcon";
 
 const StyledNavigation = styled.nav``;
 
@@ -22,8 +23,7 @@ const ListItem = styled.li`
     background: #222222;
     color: #f2f2f2;
   }
-  &:hover,
-  &:active {
+  :is(&:hover, &:active):not(:last-child) {
     letter-spacing: 5px;
   }
 
@@ -54,9 +54,7 @@ function Navigation() {
           )}
         </ListItem>
         <ListItem>
-          <a href="#">
-            <FaShoppingCart />
-          </a>
+          <CartIcon />
         </ListItem>
       </UList>
     </StyledNavigation>
