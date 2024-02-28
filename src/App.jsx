@@ -1,4 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Provider, useDispatch } from "react-redux";
+
 import Homepage from "./pages/Homepage";
 import Hatspage from "./pages/Hatspage.jsx";
 import Jacketspage from "./pages/Jacketspage.jsx";
@@ -10,11 +12,32 @@ import Menspage from "./pages/Menspage.jsx";
 import Shoppage from "./pages/shop/Shoppage.jsx";
 import Contactpage from "./pages/Contactpage.jsx";
 import Signinpage from "./pages/SigninSignuppage.jsx";
-import { AuthProvider } from "./contexts/authContext/AuthContext.jsx";
+import { store } from "./redux/store.js";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase/firebase.js";
+import { login } from "./redux/user/userSlice.js";
+// import { AuthProvider } from "./contexts/authContext/AuthContext.jsx";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, initializeUser);
+    async function initializeUser(user) {
+      if (user) {
+        dispatch(login(user.displayName));
+      } else {
+        dispatch(login(null));
+      }
+    }
+
+    return unsubscribe;
+  }, []);
+
   return (
-    <AuthProvider>
+    <>
+      {/* <AuthProvider> */}
       <GlobalStyles />
       <BrowserRouter>
         <Header />
@@ -31,7 +54,8 @@ function App() {
           <Route path="signin" element={<Signinpage />} />
         </Routes>
       </BrowserRouter>
-    </AuthProvider>
+      {/* </AuthProvider> */}
+    </>
   );
 }
 

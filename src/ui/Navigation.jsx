@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/authContext/AuthContext";
+// import { useAuth } from "../contexts/authContext/AuthContext";
 import { doSignOut } from "../firebase/Auth";
+import { useSelector } from "react-redux";
 
 const StyledNavigation = styled.nav``;
 
@@ -32,7 +33,9 @@ const ListItem = styled.li`
 `;
 
 function Navigation() {
-  const { userLoggedIn } = useAuth();
+  // const { userLoggedIn } = useAuth();
+
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   return (
     <StyledNavigation>
@@ -44,7 +47,7 @@ function Navigation() {
           <Link to="/contact">CONTACT</Link>
         </ListItem>
         <ListItem>
-          {userLoggedIn ? (
+          {currentUser ? (
             <span onClick={doSignOut}>SIGN OUT</span>
           ) : (
             <Link to="/signin">SIGN IN</Link>

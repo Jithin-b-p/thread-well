@@ -7,6 +7,7 @@ const StyledSigninpage = styled.main`
   gap: 5rem;
   justify-content: center;
   flex-wrap: wrap;
+  padding-block-end: 3rem;
 `;
 
 function SigninSignuppage() {

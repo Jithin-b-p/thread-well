@@ -23,7 +23,7 @@ function Signin() {
   } = useForm();
   const [currEmailValue, currPasswordValue] = watch(["email", "password"]);
   const navigate = useNavigate();
-  const { setLoading } = useAuth();
+  // const { setLoading } = useAuth();
 
   useEffect(() => {
     clearErrors("invalidCredential");
@@ -50,9 +50,9 @@ function Signin() {
 
   function onGoogleSignIn(e) {
     e.preventDefault();
-    setLoading((loading) => !loading);
+    // setLoading((loading) => !loading);
     const result = doSignInWithGoogle();
-    result.then(() => setLoading((loading) => !loading));
+    // result.then(() => setLoading((loading) => !loading));
     navigate("/home");
   }
 

@@ -45,8 +45,8 @@ const StyledHomeLayout = styled.section`
   padding-block-end: 3rem;
 `;
 function HomeLayout() {
-  const { loading } = useAuth();
-
+  // const { loading } = useAuth();
+  const loading = false;
   return (
     <>
       {loading ? (
