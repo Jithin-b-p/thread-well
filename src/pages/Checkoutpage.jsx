@@ -37,7 +37,10 @@ const StyledEmptyMessage = styled.p`
 
 function Checkoutpage() {
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const totalAmount = cartItems.reduce((acc, item) => acc + item.price, 0);
+  const totalAmount = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   return (
     <StyledCheckoutpage>
