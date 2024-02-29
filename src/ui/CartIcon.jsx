@@ -32,14 +32,16 @@ const StyledNotification = styled.div`
 function CartIcon() {
   const dispatch = useDispatch();
   const hidden = useSelector((state) => state.cart.hidden);
-  const numberOfCartItems = useSelector((state) => state.cart.cartItems).length;
-
+  const totalQuntity = useSelector((state) => state.cart.cartItems).reduce(
+    (acc, item) => acc + item.quantity,
+    0
+  );
   return (
     <StyledLink onClick={(e) => dispatch(cartClicked())}>
       <FaShoppingCart />
-      {numberOfCartItems ? (
+      {totalQuntity ? (
         <StyledNotification>
-          <span>{numberOfCartItems}</span>
+          <span>{totalQuntity}</span>
         </StyledNotification>
       ) : null}
       {!hidden && <Cartdropdown />}
