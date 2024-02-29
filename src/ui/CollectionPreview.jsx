@@ -7,7 +7,7 @@ const StyledCollectionPreview = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 2.5rem;
 `;
 
 function CollectionPreview({ items }) {
