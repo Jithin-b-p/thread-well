@@ -2,6 +2,8 @@
 import styled from "styled-components";
 
 import Button from "./Button";
+import { useDispatch } from "react-redux";
+import { itemAdded } from "../redux/cart/cartSlice";
 
 const StyledPreviewItem = styled.div`
   flex: 0 1 20%;
@@ -54,11 +56,17 @@ const StyledButton = styled(Button)`
 `;
 
 function PreviewItem({ details }) {
+  const dispatch = useDispatch();
   return (
     <StyledPreviewItem>
       <ImageContainer>
         <Image $imgurl={details.imageUrl}>
-          <StyledButton $variation="tertiary">Add to cart</StyledButton>
+          <StyledButton
+            onClick={() => dispatch(itemAdded({ ...details }))}
+            $variation="tertiary"
+          >
+            Add to cart
+          </StyledButton>
         </Image>
       </ImageContainer>
       <ProductDetails>

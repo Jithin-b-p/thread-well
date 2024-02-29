@@ -32,13 +32,16 @@ const StyledNotification = styled.div`
 function CartIcon() {
   const dispatch = useDispatch();
   const hidden = useSelector((state) => state.cart.hidden);
+  const numberOfCartItems = useSelector((state) => state.cart.cartItems).length;
 
   return (
     <StyledLink onClick={(e) => dispatch(cartClicked())}>
       <FaShoppingCart />
-      <StyledNotification>
-        <span>{2}</span>
-      </StyledNotification>
+      {numberOfCartItems ? (
+        <StyledNotification>
+          <span>{numberOfCartItems}</span>
+        </StyledNotification>
+      ) : null}
       {!hidden && <Cartdropdown />}
     </StyledLink>
   );
