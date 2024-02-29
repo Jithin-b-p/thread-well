@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 // import { useAuth } from "../contexts/authContext/AuthContext";
 import { doSignOut } from "../firebase/Auth";

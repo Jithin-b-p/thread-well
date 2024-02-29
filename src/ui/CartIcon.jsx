@@ -1,9 +1,10 @@
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 import Cartdropdown from "./Cartdropdown";
-import { useDispatch } from "react-redux";
-import { cartClick } from "../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { cartClicked } from "../redux/cart/cartSlice";
 
 const StyledLink = styled(Link)`
   position: relative;
@@ -30,14 +31,15 @@ const StyledNotification = styled.div`
 
 function CartIcon() {
   const dispatch = useDispatch();
+  const hidden = useSelector((state) => state.cart.hidden);
 
   return (
-    <StyledLink onClick={() => dispatch(cartClick())}>
+    <StyledLink onClick={(e) => dispatch(cartClicked())}>
       <FaShoppingCart />
       <StyledNotification>
         <span>{2}</span>
       </StyledNotification>
-      <Cartdropdown />
+      {!hidden && <Cartdropdown />}
     </StyledLink>
   );
 }

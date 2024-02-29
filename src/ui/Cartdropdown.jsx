@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Button from "./Button";
 import CartItems from "./CartItems";
-import { useSelector } from "react-redux";
 
 const Styledcartdropdown = styled.div`
   position: absolute;
@@ -19,16 +18,17 @@ const Styledcartdropdown = styled.div`
   border: 1px solid #222;
   transition: opacity 0.3s;
 
-  opacity: ${(props) => props.$cartClick || "0"};
+  /* opacity: ${(props) => props.$cartClicked || "0"}; */
 `;
 
 const StyledButton = styled(Button)`
   margin-block-start: auto;
 `;
 function Cartdropdown() {
-  const userCartClick = useSelector((state) => state.user.userCartClick);
+  // const cartClicked = useSelector((state) => state.cart.hidden);
   return (
-    <Styledcartdropdown $cartClick={userCartClick}>
+    // <Styledcartdropdown $cartClick={cartClicked}>
+    <Styledcartdropdown>
       <CartItems />
       <StyledButton $variation="tertiary">GO TO CHECKOUT</StyledButton>
     </Styledcartdropdown>
