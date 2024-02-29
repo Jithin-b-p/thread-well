@@ -45,6 +45,7 @@ const StyledHomeLayout = styled.section`
 `;
 function HomeLayout() {
   // const { loading } = useAuth();
+
   const loading = false;
   return (
     <>

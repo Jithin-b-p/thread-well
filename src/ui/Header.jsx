@@ -3,6 +3,7 @@ import Logo from "./Logo";
 import Navigation from "./Navigation";
 
 const StyledHeader = styled.header`
+  position: relative;
   width: min(80%, 75rem);
   height: 8rem;
   margin-inline: auto;

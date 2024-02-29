@@ -38,15 +38,17 @@ function CartIcon() {
     0
   );
   return (
-    <StyledLink onClick={(e) => dispatch(cartClicked())}>
-      <FaShoppingCart />
-      {totalQuntity ? (
-        <StyledNotification>
-          <span>{totalQuntity}</span>
-        </StyledNotification>
-      ) : null}
+    <>
+      <StyledLink onClick={(e) => dispatch(cartClicked())}>
+        <FaShoppingCart />
+        {totalQuntity ? (
+          <StyledNotification>
+            <span>{totalQuntity}</span>
+          </StyledNotification>
+        ) : null}
+      </StyledLink>
       {!hidden && <Cartdropdown />}
-    </StyledLink>
+    </>
   );
 }
 

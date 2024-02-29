@@ -16,7 +16,7 @@ function CollectionPreview({ items }) {
       {items
         .filter((item, idx) => idx < 4)
         .map((item) => (
-          <PreviewItem key={item.key} details={item} />
+          <PreviewItem key={item.id} details={item} />
         ))}
     </StyledCollectionPreview>
   );

@@ -1,5 +1,12 @@
 /* eslint-disable react/prop-types */
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+
+import {
+  itemAdded,
+  itemRemoved,
+  quantityReduced,
+} from "../redux/cart/cartSlice";
 
 const StyledImage = styled.img`
   width: 8.5rem;
@@ -31,16 +38,36 @@ const StyledCheckoutItemDetails = styled.div`
 
   text-align: center;
 `;
+const StyledButton = styled.button`
+  padding-block: 0.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background: none;
+  border: 0;
+  cursor: pointer;
+`;
 
 function CheckoutItemDetails({ item }) {
+  const dispatch = useDispatch();
+
   return (
     <StyledCheckoutItemDetails>
-      <StyledImage src={item.imageUrl} alt="" />
+      <StyledImage src={item.imageUrl} alt="product image" />
       <StyledDescription>{item.name}</StyledDescription>
-      <StyledQuantity>{item.quantity}</StyledQuantity>
+      <StyledQuantity>
+        <StyledButton onClick={() => dispatch(quantityReduced({ ...item }))}>
+          &lang;
+        </StyledButton>
+        {item.quantity}
+        <StyledButton onClick={() => dispatch(itemAdded({ ...item }))}>
+          &rang;
+        </StyledButton>
+      </StyledQuantity>
       <StyledPrice>${item.price}</StyledPrice>
       <StyledRemove>
-        <StyledRemoveButton>&Chi;</StyledRemoveButton>
+        <StyledRemoveButton onClick={() => dispatch(itemRemoved({ ...item }))}>
+          &#10005;
+        </StyledRemoveButton>
       </StyledRemove>
     </StyledCheckoutItemDetails>
   );
