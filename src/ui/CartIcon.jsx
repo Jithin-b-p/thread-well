@@ -26,6 +26,7 @@ const StyledNotification = styled.div`
 
   color: white;
   background-color: red;
+  border: 1px solid #7b0404;
   border-radius: 50%;
 `;
 

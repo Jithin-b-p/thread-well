@@ -16,6 +16,7 @@ import Contactpage from "./pages/Contactpage.jsx";
 import Signinpage from "./pages/SigninSignuppage.jsx";
 import { auth } from "./firebase/firebase.js";
 import { login } from "./redux/user/userSlice.js";
+import Checkoutpage from "./pages/Checkoutpage.jsx";
 // import { AuthProvider } from "./contexts/authContext/AuthContext.jsx";
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
           <Route path="mens" element={<Menspage />} />
           <Route path="shop" element={<Shoppage />} />
           <Route path="contact" element={<Contactpage />} />
+          <Route path="checkout" element={<Checkoutpage />} />
           <Route
             path="signin"
             element={currentUser ? <Homepage /> : <Signinpage />}

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import MenuItem from "./MenuItem";
-import { useAuth } from "../contexts/authContext/AuthContext";
 import SpinnerHolder from "./SpinnerHolder";
 
 const sections = [

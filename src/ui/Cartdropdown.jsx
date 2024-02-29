@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "./Button";
 import CartItems from "./CartItems";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Styledcartdropdown = styled.div`
   position: absolute;
@@ -24,16 +25,32 @@ const Styledcartdropdown = styled.div`
 `;
 
 const StyledButton = styled(Button)`
+  width: 100%;
   margin-block-start: auto;
 `;
+
+const StyledEmptyMessage = styled.p`
+  font-size: 1rem;
+  text-align: center;
+`;
+const StyledLink = styled(Link)`
+  display: block;
+`;
+
 function Cartdropdown() {
   // const cartClicked = useSelector((state) => state.cart.hidden);
   const cartItemsQuantity = useSelector((state) => state.cart.cartItems).length;
   return (
     // <Styledcartdropdown $cartClick={cartClicked}>
     <Styledcartdropdown>
-      {cartItemsQuantity ? <CartItems /> : null}
-      <StyledButton $variation="tertiary">GO TO CHECKOUT</StyledButton>
+      {cartItemsQuantity ? (
+        <CartItems />
+      ) : (
+        <StyledEmptyMessage>Your cart is empty</StyledEmptyMessage>
+      )}
+      <StyledLink to="/checkout">
+        <StyledButton $variation="tertiary">GO TO CHECKOUT</StyledButton>
+      </StyledLink>
     </Styledcartdropdown>
   );
 }

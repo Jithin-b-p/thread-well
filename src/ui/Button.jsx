@@ -45,7 +45,7 @@ const Button = styled.button`
 `;
 
 Button.defaultProps = {
-  variations: "tertiary",
+  $variations: "tertiary",
 };
 
 export default Button;
