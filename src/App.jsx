@@ -11,7 +11,7 @@ import Header from "./ui/Header.jsx";
 import Sneakers from "./pages/Sneakerspage.jsx";
 import Womenspage from "./pages/Womenspage.jsx";
 import Menspage from "./pages/Menspage.jsx";
-import Shoppage from "./pages/shop/Shoppage.jsx";
+import Shoppage from "./pages/Shoppage.jsx";
 import Contactpage from "./pages/Contactpage.jsx";
 import Signinpage from "./pages/SigninSignuppage.jsx";
 import { auth } from "./firebase/firebase.js";
