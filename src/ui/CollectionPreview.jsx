@@ -4,10 +4,12 @@ import styled from "styled-components";
 import PreviewItem from "./PreviewItem";
 
 const StyledCollectionPreview = styled.div`
+  max-width: 70rem;
+  margin-inline: auto;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem;
+  column-gap: 2rem;
+  row-gap: 3rem;
 `;
 
 function CollectionPreview({ items }) {

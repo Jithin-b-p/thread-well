@@ -17,6 +17,7 @@ import Signinpage from "./pages/SigninSignuppage.jsx";
 import { auth } from "./firebase/firebase.js";
 import { login } from "./redux/user/userSlice.js";
 import Checkoutpage from "./pages/Checkoutpage.jsx";
+import CatergoryPage from "./pages/CatergoryPage.jsx";
 // import { AuthProvider } from "./contexts/authContext/AuthContext.jsx";
 
 function App() {
@@ -50,7 +51,13 @@ function App() {
           <Route path="sneakers" element={<Sneakers />} />
           <Route path="womens" element={<Womenspage />} />
           <Route path="mens" element={<Menspage />} />
-          <Route path="shop" element={<Shoppage />} />
+          <Route path="shop">
+            <Route index element={<Shoppage />} />
+            <Route path=":category" element={<CatergoryPage />} />
+          </Route>
+
+          {/* <Route path="shop" element={<Shoppage />} />
+          <Route path="shop/:category" element={<CatergoryPage />} /> */}
           <Route path="contact" element={<Contactpage />} />
           <Route path="checkout" element={<Checkoutpage />} />
           <Route

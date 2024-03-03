@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 
 import Collection from "../ui/Collection";
@@ -9,7 +10,6 @@ const StyledShoppage = styled.main`
 function Shoppage() {
   return (
     <StyledShoppage>
-      <h2>Collections</h2>
       <Collection />
     </StyledShoppage>
   );
